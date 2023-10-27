@@ -1,0 +1,29 @@
+.stocks-grid {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px;
+    box-sizing: border-box;
+}
+
+.stocks-grid .stocks-grid__container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.stocks-grid .stocks-grid__table-holder {
+}
+
+td.active {
+    cursor: pointer;
+}
+td.non-wrapped {
+    white-space: nowrap;
+}
+
+.pie-chart {
+    display: flex;
+    justify-content: center;
+}

@@ -1,0 +1,15 @@
+.table-header {
+    display: flex;
+    width: 100%;
+    column-gap: 1em;
+    font-weight: 600;
+    margin-bottom: 1em;
+}
+
+.table-header .product-info {
+    white-space: nowrap;
+}
+
+.spacer {
+    flex-grow: 1;
+}
