@@ -1,24 +1,17 @@
-import { PRODUCTS_MOCK } from "./mocks";
+import { ConfigService } from "./Config";
 import { IProduct } from "./models/Product.model";
+import { HttpService } from "./Http.service";
 
+const baseURL = ConfigService.baseURL;
 export class ProductsService {
     private static products: IProduct[];
-    public static getProducts(): Promise<IProduct[]> {
-        if (this.products) {
-            return Promise.resolve(this.products);
-        }
-        const timeout = Math.random() * 500 + 250;
-        return new Promise((resolve, reject) => {
-            return setTimeout(() => {
-                this.products = PRODUCTS_MOCK;
-                resolve(PRODUCTS_MOCK);
-            }, timeout);
-        });
-        // fetch()
+
+    public static async getProducts(): Promise<IProduct[]> {
+        this.products = await HttpService.get<IProduct[]>(`${baseURL}/products`);
+        return this.products;
     }
 
     public static async getProductById(id: string): Promise<IProduct | undefined> {
-        const products = await this.getProducts();
-        return products.find((product) => product.id === id);
+        return await HttpService.get<IProduct>(`${baseURL}/products/${id}`);
     }
 }

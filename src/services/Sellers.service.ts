@@ -1,13 +1,10 @@
-import { SELLERS_MOCK } from "./mocks";
+import { ConfigService } from "./Config";
+import { HttpService } from "./Http.service";
 import { ISeller } from "./models/Seller.model";
 
+const baseURL = ConfigService.baseURL;
 export class SellersService {
-    public static getSellers(): Promise<ISeller[]> {
-        return new Promise((resolve) => {
-            const timeout = Math.random() * 500 + 250;
-            return setTimeout(() => {
-                resolve(SELLERS_MOCK);
-            }, timeout);
-        });
+    public static async getSellers(): Promise<ISeller[]> {
+        return await HttpService.get<ISeller[]>(`${baseURL}/sellers`);
     }
 }

@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { IStockInfo } from "../../services/models";
 import './PictureContainer.css';
+import { ConfigService } from "../../services/Config";
 
 interface IPictureContainerProps {
     display?: boolean;
     stock?: IStockInfo;
 }
+
+const baseURL = ConfigService.baseURL;
 
 export const PictureContainer = (props: IPictureContainerProps) => {
     const { stock, display } = props;
@@ -15,7 +18,7 @@ export const PictureContainer = (props: IPictureContainerProps) => {
     useEffect(() => {
         if (stock) {
             setLatestStock(stock);
-            setUrl(`/products/product-${stock?.productId}.jpg`);
+            setUrl(`${baseURL}/stock-info/image/${stock?.productId}`);
         }
     }, [stock]);
 

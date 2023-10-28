@@ -1,15 +1,12 @@
-import { STOCK_INFO_MOCK } from "./mocks";
+import { ConfigService } from "./Config";
+import { HttpService } from "./Http.service";
 import { IProduct } from "./models/Product.model";
 import { IStockInfo } from "./models/StockInfo.model";
 
+const baseURL = ConfigService.baseURL;
 export class StockService {
     public static async getFullStockInfo(): Promise<IStockInfo[]> {
-        return new Promise((resolve, reject) => {
-            const timeout = Math.random() * 500 + 250;
-            return setTimeout(() => {
-                resolve(STOCK_INFO_MOCK);
-            }, timeout);
-        });
+        return await HttpService.get<IStockInfo[]>(`${baseURL}/stock-info`);
     }
 
     public static async getStockInfoByProduct(product: IProduct): Promise<IStockInfo[]> {

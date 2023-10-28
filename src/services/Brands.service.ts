@@ -1,15 +1,11 @@
-import { BRANDS_MOCK } from "./mocks/brands.mock";
+import { ConfigService } from "./Config";
+import { HttpService } from "./Http.service";
 import { IBrand } from "./models/Brand.model";
 
+const baseURL = ConfigService.baseURL;
 export class BrandsService {
     public static getBrands(): Promise<IBrand[]> {
-        const timeout = Math.random() * 500 + 250;
-        return new Promise((resolve, reject) => {
-            return setTimeout(() => {
-                resolve(BRANDS_MOCK);
-            }, timeout);
-        });
-        // fetch()
+        return HttpService.get<IBrand[]>(`${baseURL}/brands`);
     }
 
     public static async getBrandById(id: string): Promise<IBrand | undefined> {
